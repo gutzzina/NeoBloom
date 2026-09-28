@@ -321,6 +321,7 @@ a { color: inherit; text-decoration: none; }
 
 .nav__logo {
   width: 1.7rem;
+   height: 1.7rem;
   object-fit: cover;
 } 
 
