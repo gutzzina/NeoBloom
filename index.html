@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  NEOBLOOM · Repositorio interactivo / Archivo biotecnológico  ·  REDISEÑO
+  ----------------------------------------------------------------------------
+  ESTRUCTURA DEL PROYECTO (los tres archivos deben estar en la MISMA carpeta):
+    /index.html   ← este archivo (contenido y estructura)
+    /style.css    ← todo el diseño (colores y tipos en :root)
+    /script.js    ← parallax, fade-in, carrusel, modal y cuenta regresiva
+
+  QUÉ CAMBIÓ:
+    · Nav + Hero (secciones 1 y 2)  → SIN CAMBIOS (salvo el href de "Ciclo · Red estable")
+    · Secciones 3 a 7               → rediseño bento + papel rasgado + textos nuevos
+    · Sección 6 (#co-bloom)         → reemplaza a la vieja "Terminal": cuenta regresiva
+                                      y botón "JUGAR AHORA" (ver script.js, sección 7)
+
+  Busca "INSERTAR" o "CAMBIAR" para encontrar los puntos que podés editar.
+  ============================================================================
+-->
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO / metadatos: cambiá estos textos cuando publiques -->
+  <title>NeoBloom · Archivo biotecnológico</title>
+  <meta name="description" content="NeoBloom es un ecosistema abierto donde la infraestructura tecnológica alimenta a la flora y la flora nutre a las personas.">
+  <meta name="theme-color" content="#272525">
+
+  <!-- ===== TIPOGRAFÍAS (Google Fonts) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Krona+One&family=Playfair+Display:ital@1&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ===== HOJA DE ESTILOS ===== -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Si el navegador no ejecuta JS, mostramos directamente el botón de juego -->
+  <noscript>
+    <style>
+      #launch-countdown { display: none !important; }
+      #play-btn { display: inline-block !important; }
+    </style>
+  </noscript>
+</head>
+
+<body>
+<!-- Pantalla de carga / disolución inicial -->
+  <div class="page-loader" aria-hidden="true"></div>
+<!-- Enlace de accesibilidad: solo visible al navegar con teclado (tecla Tab) -->
+<a class="skip-link" href="#inicio">Saltar al contenido</a>
+
+<!-- Top countdown bar -->
+<div class="top-countdown" id="top-countdown" aria-live="polite" aria-label="Cuenta regresiva para Co-Bloom">
+  <div class="top-countdown__inner">
+    <span class="top-countdown__label">cuenta regresiva para co-bloom</span>
+    <div class="top-countdown__timer">
+      <span class="top-countdown__unit"><span id="top-cd-hours">00</span><span class="top-countdown__sep">:</span></span>
+      <span class="top-countdown__unit"><span id="top-cd-minutes">00</span><span class="top-countdown__sep">:</span></span>
+      <span class="top-countdown__unit"><span id="top-cd-seconds">00</span></span>
+    </div>
+  </div>
+</div>
+
+<!--
+  ============================================================================
+  1 · BARRA DE NAVEGACIÓN (Isla flotante)   ← SIN CAMBIOS
+  ============================================================================
+-->
+<header class="nav" id="nav">
+
+<a class="nav__brand" href="#inicio">
+  <img src="recursos/logoneobloom.png" alt="NeoBloom" class="nav__logo">
+  <span>NeoBloom</span>
+</a>
+
+  <!-- Hamburguesa (solo móvil) -->
+  <button class="nav__toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu">
+    <span class="nav__toggle-icon" aria-hidden="true"></span>
+  </button>
+
+  <!-- Centro: Enlaces -->
+  <nav class="nav__links" id="nav-menu" aria-label="Secciones del archivo">
+    <a href="#manifiesto">Manifiesto</a>
+    <a href="#simbiosis">Simbiosis</a>
+    <a href="#catalogo">Biomateriales</a>
+    <!-- El destino antiguo (#login) no existía; ahora lleva al lanzamiento de Co-Bloom -->
+    <a href="#co-bloom" class="nav__login">Ciclo · Red estable</a>
+  </nav>
+
+  <!-- Derecha: Acciones (Desktop) -->
+  <div class="nav__actions">
+    <a href="#co-bloom" class="nav__login">Ciclo · Red estableㅤㅤ</a>
+  </div>
+
+</header>
+
+<main>
+
+  <!--
+    ==========================================================================
+    2 · HERO (100vh)   ← SIN CAMBIOS (video, parallax, grilla interactiva)
+    ==========================================================================
+  -->
+  <section class="hero" id="inicio" style="position: relative; overflow: hidden;">
+
+    <!-- Capa A: retícula técnica de fondo (patrón puro CSS, sin imágenes) -->
+    <div class="hero__grid" data-parallax="0.15" aria-hidden="true"></div>
+
+    <!-- VIDEO DE PORTADA -->
+    <video class="video-portada" autoplay loop muted playsinline data-parallax="0.4">
+      <source src="recursos/videoportada.mp4" type="video/mp4">
+      Tu navegador no soporta videos.
+    </video>
+
+    <!-- Capa B: halo de bioluminiscencia -->
+    <div class="hero__glow" data-parallax="0.15" aria-hidden="true"></div>
+
+    <!-- Capa C: contenido -->
+    <div class="hero__content" data-parallax="-0.12">
+
+      <!-- <a href="#catalogo" class="hero__badge">
+        <span class="hero__badge-tag">Nuevo</span>
+        Co-Bloom ya está disponible
+        <span class="hero__badge-arrow">→</span> < ACTIVAR CO BLOOM
+      </a>-->
+
+      <h1 class="hero__title">
+        NeoBloom<br>
+        <span class="text-accent">regeneración</span> y tecnología
+      </h1>
+
+      <p class="hero__text hero__text--small">
+        La infraestructura alimenta a la flora, la flora nutre a la ciudad y la participación humana perpetúa este ciclo de supervivencia recíproca.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--ghost" href="#manifiesto">Leer el manifiesto</a>
+      </div>
+    </div>
+
+    <!-- Indicador de scroll -->
+    <a class="hero__cue" href="#manifiesto" aria-label="Bajar al manifiesto">
+      <span class="hero__cue-line" aria-hidden="true"></span>
+      Descender
+    </a>
+  </section>
+
+
+  <!--
+    ==========================================================================
+    3 · MANIFIESTO  (bento: papel rasgado + 3 principios + foto)
+    Cada elemento con data-reveal aparece con fade-in al entrar en pantalla.
+    ==========================================================================
+  -->
+  <section class="section manifesto" id="manifiesto">
+    <div class="shell">
+
+      <p class="section__tag" data-reveal>Manifiesto</p>
+      <h2 class="section__title" data-reveal data-reveal-delay="1">
+        Un nuevo ciclo comienza a crecer
+      </h2>
+
+      <div class="bento bento--manifesto">
+
+        <!-- Papel rasgado grande: el mensaje principal -->
+        <article class="tile tile--paper manifesto__paper" data-reveal data-reveal-delay="1">
+          <span class="tape" aria-hidden="true"></span>
+          <h3 class="paper__title">Nada crece cerrado</h3>
+          <p class="paper__lead">
+            NeoBloom nació de una idea simple, la ciudad y la naturaleza se cuidan mejor juntas.
+            Creemos en un futuro donde la tecnología, la naturaleza y las personas trabajan en equipo
+            para regenerar lo que hoy se daña.
+          </p>
+          <p class="paper__text">
+            Y vos sos parte de esto. Sin tu mano, el ciclo no gira.
+          </p>
+          <a class="btn btn--paper" href="#catalogo">Descubrí los biomateriales</a>
+        </article>
+
+        <!-- Principios (duplicá un <article> para sumar otro) -->
+        <article class="tile tile--glass principle principle--a" data-reveal data-reveal-delay="2" data-accent="verde">
+          <p class="tile__eyebrow">01</p>
+          <h3 class="principle__title">Ecosistema abierto</h3>
+          <p>
+Acá nada se desperdicia. Lo que hoy sobra de un cultivo, mañana es el motor y el suelo del que viene.
+          </p>
+        </article>
+
+        <article class="tile tile--glass principle principle--b" data-reveal data-reveal-delay="3" data-accent="celeste">
+          <p class="tile__eyebrow">02</p>
+          <h3 class="principle__title">Economía circular</h3>
+          <p>
+Servidores que cuidan plantas y plantas que limpian el aire. Los invernaderos aprovechan el calor y la flora les devuelve un aire puro.
+          </p>
+        </article>
+
+
+
+        <!-- Tile de foto (cambiá la imagen por la que prefieras) -->
+<!-- Tile de foto (Mini muestrario rotativo) -->
+        <figure class="tile tile--photo" data-reveal data-reveal-delay="1">
+          <img class="slide is-active" src="recursos/muestrario8.jpg" alt="Biomaterial" loading="lazy">
+          <img class="slide" src="recursos/muestrario2.jpg" alt="Biomaterial" loading="lazy">
+          <img class="slide" src="recursos/muestrario4.jpg" alt="Biomaterial" loading="lazy">
+          <img class="slide" src="recursos/muestrario5.jpg" alt="Biomaterial" loading="lazy">
+          
+          <figcaption>Registro · Biomateriales</figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!--
+    ==========================================================================
+    4 · SIMBIOSIS · CONTENEDOR 3D (SPLINE)   ← el visor de Spline NO se tocó
+    ==========================================================================
+  -->
+<!--
+    ==========================================================================
+    4 · SIMBIOSIS · CONTENEDOR 3D (SPLINE)
+    ==========================================================================
+  -->
+  <section class="section symbiosis" id="simbiosis">
+    <div class="shell">
+      
+      <!-- NUEVO: Contenedor para dividir en 2 columnas -->
+      <div class="symbiosis__layout">
+
+        <!-- Columna Izquierda: Texto y botón -->
+        <header class="symbiosis__head" data-reveal>
+          <p class="section__tag">Unidad de cultivo NB-04</p>
+          <h2 class="section__title" style="margin-top: 0.5rem; line-height: 1.2;">Conocé el dispositivo</h2>
+          <p class="symbiosis__text">
+            Un pedacito del universo NeoBloom para que lo explores. Movelo con el cursor
+            y descubrí cómo se ve. Sistema de simulación, interacción y descrubimiento del equilibrio del ecosistema.
+          </p>
+
+    <!-- Botón Explorar que abre el modal -->
+          <button class="btn btn--ghost" type="button" aria-haspopup="dialog" aria-controls="info-modal" style="margin-top: 2rem; padding: 0.9em 1.8em; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; letter-spacing: 0.05em; display: inline-flex; align-items: center; gap: 0.8rem;">
+            CONOCER NB-04 
+          </button>
+        </header>
+
+        <!-- Columna Derecha: Visor 3D y Datos -->
+        <div class="symbiosis__visuals">
+          <div class="stage" data-reveal data-reveal-delay="1">
+            <script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.57/build/spline-viewer.js"></script>
+            <spline-viewer url="https://prod.spline.design/P3klksN04WxGM6pD/scene.splinecode"></spline-viewer>
+
+            <div class="stage__placeholder">
+              <span class="stage__dot" aria-hidden="true"></span>
+              <p></p>
+            </div>
+
+            <span class="stage__corner stage__corner--tl" aria-hidden="true"></span>
+            <span class="stage__corner stage__corner--tr" aria-hidden="true"></span>
+            <span class="stage__corner stage__corner--bl" aria-hidden="true"></span>
+            <span class="stage__corner stage__corner--br" aria-hidden="true"></span>
+          </div>
+
+          <ul class="readout" data-reveal data-reveal-delay="2">
+            <li class="tile tile--glass"><span>Humedad</span> 68%</li>
+            <li class="tile tile--glass"><span>Esporas activas</span> 12.400</li>
+            <li class="tile tile--glass"><span>Energía de red</span> 3,2 kWh</li>
+          </ul>
+        </div>
+
+      </div> <!-- /symbiosis__layout -->
+
+    </div>
+  </section>
+
+
+
+  <!--
+    ==========================================================================
+    5 · CATÁLOGO DE BIOMATERIALES (carrusel de 3 en 3; en móvil, de 1 en 1)
+    IMPORTANTE: script.js espera 9 tarjetas .card dentro de 3 .carousel-page.
+    Si sumás o quitás tarjetas, ajustá también "allCards.length !== 9" en script.js.
+    ==========================================================================
+  -->
+  <section class="section catalog" id="catalogo">
+    <div class="shell">
+
+      <header class="catalog__head">
+        <p class="section__tag" data-reveal>Muestrario</p>
+        <h2 class="section__title" data-reveal data-reveal-delay="1">
+          Nueve biomateriales que ya están creciendo
+        </h2>
+        <p class="catalog__text" data-reveal data-reveal-delay="2">
+          Date una vuelta por el registro de materiales activos. Cada ficha te cuenta cuánto
+          dura su ciclo y de qué rincón del ecosistema viene.
+        </p>
+      </header>
+
+      <div class="catalog-container tile tile--glass" data-reveal data-reveal-delay="3">
+
+        <button class="carousel-btn carousel-btn--prev" aria-label="Anterior">←</button>
+
+        <div class="catalog__grid">
+
+          <!-- Página 1 -->
+          <div class="carousel-page is-active">
+
+            <article class="card" data-accent="verde">
+              <div class="card__image-box">
+                <img src="recursos/muestrario2.jpg" alt="Membrana Bloom">
+              </div>
+              <p class="card__code">NB-01</p>
+              <h3 class="card__title">Membrana Bloom</h3>
+              <p class="card__text">Una piel táctil y sonora que cuida la vida sin cambiarle la esencia.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>14 días</dd></div>
+                <div><dt>Origen</dt><dd>Huerto Sur</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="celeste">
+              <div class="card__image-box">
+                <img src="recursos/muestrario3.jpg" alt="Panel Bio-Link">
+              </div>
+              <p class="card__code">NB-02</p>
+              <h3 class="card__title">Panel Bio-Link</h3>
+              <p class="card__text">Tocalo y la presión de tu mano se convierte en energía para la ciudad.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>8 meses</dd></div>
+                <div><dt>Origen</dt><dd>Torre Húmeda</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="verde">
+              <div class="card__image-box">
+                <img src="recursos/muestrario5.jpg" alt="Emulador de Olor">
+              </div>
+              <p class="card__code">NB-03</p>
+              <h3 class="card__title">Emulador de Olor</h3>
+              <p class="card__text">Un purificador de ambientes donde naturaleza y tecnología trabajan codo a codo.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>72 horas</dd></div>
+                <div><dt>Origen</dt><dd>Estación Central</dd></div>
+              </dl>
+            </article>
+
+          </div>
+
+          <!-- Página 2 -->
+          <div class="carousel-page">
+
+            <article class="card" data-accent="celeste">
+              <div class="card__image-box">
+                <img src="recursos/muestrario4.jpg" alt="Esferas Moleculares">
+              </div>
+              <p class="card__code">NB-04</p>
+              <h3 class="card__title">Esferas Moleculares</h3>
+              <p class="card__text">Pequeñas piezas de diseño molecular para concentrarte y recargar la cabeza.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>21 días</dd></div>
+                <div><dt>Origen</dt><dd>Laboratorio Bio</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="verde">
+              <div class="card__image-box">
+                <img src="recursos/muestrario6.jpg" alt="Lemon Stream">
+              </div>
+              <p class="card__code">NB-05</p>
+              <h3 class="card__title">Lemon Stream</h3>
+              <p class="card__text">Una bebida fresca y cítrica, con perfiles botánicos para sorprender al paladar.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>5 días</dd></div>
+                <div><dt>Origen</dt><dd>Laboratorio Bio</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="celeste">
+              <div class="card__image-box">
+                <img src="recursos/muestrario9.jpg" alt="Esferas Cognitivas">
+              </div>
+              <p class="card__code">NB-06</p>
+              <h3 class="card__title">Esferas Cognitivas</h3>
+              <p class="card__text">Sabores que despejan la mente y le dan un respiro a la fatiga.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>30 días</dd></div>
+                <div><dt>Origen</dt><dd>Laboratorio Bio</dd></div>
+              </dl>
+            </article>
+
+          </div>
+
+          <!-- Página 3 -->
+          <div class="carousel-page">
+
+            <article class="card" data-accent="verde">
+              <div class="card__image-box">
+                <img src="recursos/muestrario8.jpg" alt="Neuroflora">
+              </div>
+              <p class="card__code">NB-07</p>
+              <h3 class="card__title">Neuroflora</h3>
+              <p class="card__text">Un rincón para mirar de cerca cómo naturaleza y tecnología conviven en equilibrio.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>10 días</dd></div>
+                <div><dt>Origen</dt><dd>Invernadero</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="celeste">
+              <div class="card__image-box">
+                <img src="recursos/muestrario7.jpg" alt="Aroma Menta">
+              </div>
+              <p class="card__code">NB-08</p>
+              <h3 class="card__title">Aroma Menta</h3>
+              <p class="card__text">Frescura y aire limpio gracias a plantas híbridas que conducen el aroma.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>12 días</dd></div>
+                <div><dt>Origen</dt><dd>Olfativo</dd></div>
+              </dl>
+            </article>
+
+            <article class="card" data-accent="verde">
+              <div class="card__image-box">
+                <img src="recursos/muestrario1.jpg" alt="Sistema de Audio Orgánico">
+              </div>
+              <p class="card__code">NB-09</p>
+              <h3 class="card__title">Sistema de Audio Orgánico</h3>
+              <p class="card__text">Hongos bio-modificados que reinterpretan tu música en tiempo real.</p>
+              <dl class="card__meta">
+                <div><dt>Ciclo</dt><dd>2 horas</dd></div>
+                <div><dt>Origen</dt><dd>Sector Auditivo</dd></div>
+              </dl>
+            </article>
+
+          </div>
+
+        </div>
+
+        <button class="carousel-btn carousel-btn--next" aria-label="Siguiente">→</button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!--
+    ==========================================================================
+    6 · COMUNIDAD  (bento: "Ecosistema abierto" + newsletter en papel rasgado)
+    ==========================================================================
+  -->
+  <section class="section community" id="comunidad">
+    <div class="shell">
+
+      <div class="bento bento--community">
+
+        <article class="tile tile--glass community__join" data-reveal data-accent="verde">
+          <img class="community__logo" src="recursos/logoneobloom.png" alt="" aria-hidden="true">
+          <p class="tile__eyebrow">Ecosistema abierto</p>
+          <h2 class="tile__title">Una red que crece con vos</h2>
+          <p>
+            NeoBloom es una comunidad de personas y tecnologías que impulsa la regeneración.
+            ¡Hay lugar para vos, sumate con nosotros!
+          </p>
+          <a class="btn btn--ghost" href="https://www.instagram.com/comunidad_cobloom/" target="_blank" rel="noopener noreferrer">Quiero sumarme</a>
+        </article>
+
+        <!-- Papel rasgado con formulario de suscripción -->
+        <article class="tile tile--paper community__news" id="newsletter" data-reveal data-reveal-delay="1">
+          <span class="tape" aria-hidden="true"></span>
+          <h2 class="paper__title">Sé parte del cambio</h2>
+          <p class="paper__text">Enterate de las novedades, eventos y contenido exclusivo</p>
+
+          <!--
+            CAMBIAR: el formulario todavía no está conectado a ningún servicio.
+            Cuando tengas uno (Mailchimp, Formspree, etc.) pegá su URL en la
+            constante NEWSLETTER_ENDPOINT de script.js (bloque "7b · NEWSLETTER").
+            Mientras esté vacía, el formulario avisa que las suscripciones abren pronto.
+          -->
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!--
+    ==========================================================================
+    7 · LANZAMIENTO DE CO-BLOOM  (reemplaza a la vieja "Terminal")
+    Dos estados que maneja script.js (sección 7):
+      Estado 1 → #launch-countdown visible (cuenta regresiva)
+      Estado 2 → #launch-countdown con display:none y #play-btn visible
+    La fecha objetivo se cambia en script.js → LAUNCH_CONFIG.targetDate
+    ==========================================================================
+  -->
+  <section class="section launch" id="co-bloom">
+    <div class="launch__halo" data-parallax="0.2" aria-hidden="true"></div>
+
+    <div class="shell">
+      <div class="bento bento--launch">
+
+        <article class="tile tile--glass launch__main" data-reveal data-accent="verde">
+          <p class="section__tag">Co-Bloom · El videojuego</p>
+
+          <h2 class="launch__title">Jugá, regenerá, explorá</h2>
+
+          <p class="launch__text">
+            Co-Bloom es la parte jugable de NeoBloom. Entrá al ecosistema y descubrí qué rol cumplís en su equilibrio
+          </p>
+
+          <!-- ===== ESTADO 1 · CUENTA REGRESIVA ===== -->
+          <div class="countdown-wrap" id="launch-countdown">
+            <p class="countdown__label" id="countdown-label">Falta poco para abrir la puerta</p>
+            <div class="countdown" role="timer" aria-labelledby="countdown-label">
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-hours">24</span>
+                <span class="countdown__name">Horas</span>
+              </div>
+              <span class="countdown__sep" aria-hidden="true">:</span>
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-minutes">00</span>
+                <span class="countdown__name">Minutos</span>
+              </div>
+              <span class="countdown__sep" aria-hidden="true">:</span>
+              <div class="countdown__unit">
+                <span class="countdown__num" id="cd-seconds">00</span>
+                <span class="countdown__name">Segundos</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== ESTADO 2 · BOTÓN DE JUEGO (oculto hasta que el reloj llegue a 0) ===== -->
+          <a class="btn btn--neon launch__play is-hidden" id="play-btn"
+             href="https://gutzzina.github.io/NeoBloomJuego/" target="_blank" rel="noopener noreferrer">
+            JUGAR AHORA
+          </a>
+
+          <!-- Aviso para lectores de pantalla cuando se abre el juego -->
+          <p class="sr-only" id="launch-status" aria-live="polite"></p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!--
+  ============================================================================
+  FOOTER
+  ============================================================================
+-->
+<footer class="footer">
+  <div class="shell footer__inner">
+    <p>NeoBloom · @neobloom.tdm3</p>
+    <p>Recetas bajo licencia libre. Cultivá, devolvé.</p>
+  </div>
+</footer>
+
+<!-- ============================================================================
+   8 · MODAL DE INFORMACIÓN (lo abre el botón "?" de la sección Simbiosis)
+   ======================================================================== -->
+<div class="modal" id="info-modal" role="dialog" aria-modal="true"
+     aria-labelledby="info-modal-title" aria-hidden="true" inert>
+
+  <div class="modal__backdrop" data-modal-close></div>
+
+  <div class="modal__panel">
+    <button class="modal__close" type="button" data-modal-close aria-label="Cerrar">&#215;</button>
+
+    <p class="section__tag">Sobre el dispositivo</p>
+
+    <h2 class="modal__title" id="info-modal-title">
+      ¿De qué se trata este dispositivo?
+    </h2>
+
+    <p class="modal__text">
+      Este módulo es el corazón de nuestra economía circular. Convierte la materia en energía
+      limpia y conversa todo el tiempo con la red que lo rodea. Acá nada se desperdicia, cada
+      residuo vuelve al sistema como nutriente o como recurso para la ciudad.
+    </p>
+  </div>
+</div>
+
+<canvas id="spore-canvas" aria-hidden="true"></canvas>
+
+<!-- ===== JAVASCRIPT (al final del body para que el DOM ya exista) ===== -->
+<script src="script.js"></script>
+
+</body>
+</html>
