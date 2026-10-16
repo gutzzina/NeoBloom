@@ -925,28 +925,17 @@ body.has-top-countdown .nav {
    ========================================================================== */
 .manifesto__paper { 
   grid-column: 1 / 8;  
-  grid-row: 1 / 4; 
+  grid-row: 1; 
   display: flex;
   flex-direction: column;
   justify-content: center; /* Centra el texto verticalmente */
   align-items: flex-start; /* Evita que el botón se estire a lo ancho */
 } 
 
-.principle--a { grid-column: 8 / 13; grid-row: 1; }
-.principle--b { grid-column: 8 / 13; grid-row: 2; }
-
-/* La foto se alinea en la columna 8, fila 3, y le achicamos la altura */
+/* La foto acompaña al papel a la derecha, misma fila */
 .bento--manifesto .tile--photo { 
   grid-column: 8 / 13; 
-  grid-row: 3; 
-  min-height: 9rem; /* Al ser más bajita, el papel de la izquierda se encoge */
-}
-
-.principle { color: var(--color-text-soft); }
-.principle__title {
-  font-size: var(--fs-h3);
-  color: var(--color-text);
-  margin-bottom: var(--space-sm);
+  grid-row: 1; 
 }
 
 
@@ -1466,9 +1455,7 @@ body.has-top-countdown .nav {
 /* Tablet (~1024px y abajo) */
 @media (max-width: 64rem) {
   .manifesto__paper { grid-column: 1 / 13; grid-row: auto; }
-  .principle--a { grid-column: 1 / 7;  grid-row: auto; }
-  .principle--b { grid-column: 7 / 13; grid-row: auto; }
-  /* Hacemos que la foto ocupe todo el ancho abajo de las dos cajitas */
+  /* Hacemos que la foto ocupe todo el ancho abajo del papel */
   .bento--manifesto .tile--photo { grid-column: 1 / 13; grid-row: auto; }
   .symbiosis__layout { grid-template-columns: 1fr; }
 }
@@ -1494,7 +1481,6 @@ body.has-top-countdown .nav {
 
   .bento { grid-template-columns: 1fr; }
   .manifesto__paper,
-  .principle--a, .principle--b, .principle--c,
   .bento--manifesto .tile--photo,
   .community__join, .community__news,
   .launch__main, .launch__side { grid-column: 1; }
