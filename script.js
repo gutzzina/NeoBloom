@@ -398,7 +398,7 @@
   const topCdMinutes    = document.getElementById('top-cd-minutes');
   const topCdSeconds    = document.getElementById('top-cd-seconds');
 
-  if (launchCountdown && playBtn && cdHours && cdMinutes && cdSeconds && topCountdown && topCdHours && topCdMinutes && topCdSeconds) {
+  if (launchCountdown && playBtn && cdHours && cdMinutes && cdSeconds) {
 
     let countdownTimer = null;
 
@@ -414,7 +414,7 @@
         countdownTimer = null;
       }
       launchCountdown.style.display = 'none';
-      topCountdown.classList.remove('is-visible');
+      if (topCountdown) topCountdown.classList.remove('is-visible');
       document.body.classList.remove('has-top-countdown');
       playBtn.classList.remove('is-hidden');
 
@@ -448,15 +448,17 @@
       cdHours.textContent   = pad(hours);
       cdMinutes.textContent = pad(minutes);
       cdSeconds.textContent = pad(seconds);
-      topCdHours.textContent   = pad(hours);
-      topCdMinutes.textContent = pad(minutes);
-      topCdSeconds.textContent = pad(seconds);
+      if (topCdHours)   topCdHours.textContent   = pad(hours);
+      if (topCdMinutes) topCdMinutes.textContent = pad(minutes);
+      if (topCdSeconds) topCdSeconds.textContent = pad(seconds);
     }
 
     // Pinta el estado inicial (sin avisar: si ya pasó la fecha, abre directo el juego)
     tick(false);
-    topCountdown.classList.add('is-visible');
-    document.body.classList.add('has-top-countdown');
+    if (topCountdown) {
+      topCountdown.classList.add('is-visible');
+      document.body.classList.add('has-top-countdown');
+    }
 
     // Si todavía no llegó la hora, actualiza cada segundo
     if (launchCountdown.style.display !== 'none') {
@@ -497,11 +499,10 @@
     }
 
     /* ----------------------------------------------------------------------
-       FORZAR ESTADO 2 MANUALMENTE (para probar el botón sin esperar)
-       Descomentá la línea de abajo, guardá y recargá la página.
-       Volvé a comentarla para que el reloj funcione otra vez.
+       ESTADO 2 FORZADO: el reloj queda oculto y se muestra el botón "JUGAR".
+       Para volver a la cuenta regresiva, comentá la línea de abajo.
        ---------------------------------------------------------------------- */
-    // showGameState(false);   // ← FORZAR ESTADO 2: quitá las // del principio
+    showGameState(false);   // ← ESTADO 2 ACTIVO (comentá para usar el reloj)
   }
 
 
