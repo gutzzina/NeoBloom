@@ -6,13 +6,12 @@
   ESTRUCTURA DEL PROYECTO (los tres archivos deben estar en la MISMA carpeta):
     /index.html   ← este archivo (contenido y estructura)
     /style.css    ← todo el diseño (colores y tipos en :root)
-    /script.js    ← parallax, fade-in, carrusel, modal y cuenta regresiva
+    /script.js    ← parallax, fade-in, carrusel y modal
 
   QUÉ CAMBIÓ:
     · Nav + Hero (secciones 1 y 2)  → SIN CAMBIOS (salvo el href de "Ciclo · Red estable")
     · Secciones 3 a 7               → rediseño bento + papel rasgado + textos nuevos
-    · Sección 6 (#co-bloom)         → reemplaza a la vieja "Terminal": cuenta regresiva
-                                      y botón "JUGAR AHORA" (ver script.js, sección 7)
+    · Sección 6 (#co-bloom)         → reemplaza a la vieja "Terminal": botón "JUGAR AHORA"
 
   Busca "INSERTAR" o "CAMBIAR" para encontrar los puntos que podés editar.
   ============================================================================
@@ -36,10 +35,9 @@
   <!-- ===== HOJA DE ESTILOS ===== -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Si el navegador no ejecuta JS, mostramos directamente el botón de juego -->
+  <!-- Si el navegador no ejecuta JS, igual se muestra el botón de juego -->
   <noscript>
     <style>
-      #launch-countdown { display: none !important; }
       #play-btn { display: inline-block !important; }
     </style>
   </noscript>
@@ -458,10 +456,8 @@
   <!--
     ==========================================================================
     7 · LANZAMIENTO DE CO-BLOOM  (reemplaza a la vieja "Terminal")
-    Dos estados que maneja script.js (sección 7):
-      Estado 1 → #launch-countdown visible (cuenta regresiva)
-      Estado 2 → #launch-countdown con display:none y #play-btn visible
-    La fecha objetivo se cambia en script.js → LAUNCH_CONFIG.targetDate
+    Muestra el botón "JUGAR AHORA" que abre el juego.
+    El enlace se cambia en el href de #play-btn.
     ==========================================================================
   -->
   <section class="section launch" id="co-bloom">
@@ -475,28 +471,6 @@
 
           <h2 class="launch__title">Co-Bloom ya está disponible</h2>
 
-
-          <!-- ===== ESTADO 1 · CUENTA REGRESIVA ===== -->
-          <div class="countdown-wrap" id="launch-countdown">
-            <div class="countdown" role="timer" aria-labelledby="countdown-label">
-              <div class="countdown__unit">
-                <span class="countdown__num" id="cd-hours">24</span>
-                <span class="countdown__name">Horas</span>
-              </div>
-              <span class="countdown__sep" aria-hidden="true">:</span>
-              <div class="countdown__unit">
-                <span class="countdown__num" id="cd-minutes">00</span>
-                <span class="countdown__name">Minutos</span>
-              </div>
-              <span class="countdown__sep" aria-hidden="true">:</span>
-              <div class="countdown__unit">
-                <span class="countdown__num" id="cd-seconds">00</span>
-                <span class="countdown__name">Segundos</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- ===== ESTADO 2 · BOTÓN DE JUEGO (oculto hasta que el reloj llegue a 0) ===== -->
           <a class="btn btn--neon launch__play" id="play-btn"
              href="https://gutzzina.github.io/NeoBloomJuego/" target="_blank" rel="noopener noreferrer">
             JUGAR AHORA
